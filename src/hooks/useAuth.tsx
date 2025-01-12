@@ -14,7 +14,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
 
   const login = () => {
@@ -36,12 +36,10 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
   );
 };
 
-const useAuth = () => {
+export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
-};
-
-export { AuthProvider, useAuth }; 
+}; 
