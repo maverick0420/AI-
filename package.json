@@ -2,6 +2,9 @@
   "name": "aty-live",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
     "antd": "^5.3.3",
@@ -10,7 +13,8 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
     "socket.io-client": "^4.6.1",
-    "flv.js": "^1.6.2"
+    "flv.js": "^1.6.2",
+    "react-scripts": "5.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.31",
@@ -23,6 +27,19 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "server": "node server/src/app.js"
+    "server": "node server/src/app.js",
+    "vercel-build": "react-scripts build"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 } 
