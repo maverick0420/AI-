@@ -6,21 +6,14 @@ const { Server } = require('socket.io');
 require('dotenv').config();
 
 const app = express();
-const httpServer = createServer(app);
 
 // 配置 CORS
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://ai-.vercel.app', 'https://aty-live.vercel.app'] 
+    : 'http://localhost:3000',
   credentials: true
 }));
-
-// 配置 Socket.IO
-const io = new Server(httpServer, {
-  cors: {
-    origin: 'http://localhost:3000',
-    credentials: true
-  }
-});
 
 // 解析 JSON
 app.use(express.json());
@@ -52,7 +45,23 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: '服务器错误' });
 });
 
-const PORT = process.env.PORT || 3001;
-httpServer.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-}); 
+// Vercel 部署需要导出 app
+module.exports = app;
+
+// 本地开发时启动服务器
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 3001;
+  const httpServer = createServer(app);
+  
+  // 配置 Socket.IO
+  const io = new Server(httpServer, {
+    cors: {
+      origin: 'http://localhost:3000',
+      credentials: true
+    }
+  });
+
+  httpServer.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+} 
