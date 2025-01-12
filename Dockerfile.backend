@@ -1,0 +1,16 @@
+FROM node:16
+
+WORKDIR /app
+
+# 复制package.json和package-lock.json
+COPY server/package*.json ./
+
+# 安装依赖
+RUN npm install
+
+# 复制源代码
+COPY server .
+
+EXPOSE 3001
+
+CMD ["npm", "start"] 

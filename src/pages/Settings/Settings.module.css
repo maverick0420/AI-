@@ -1,0 +1,54 @@
+.settings {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 8px;
+}
+
+.avatarUpload {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.uploadText {
+  margin-top: 8px;
+  color: #1890ff;
+  cursor: pointer;
+}
+
+.uploadText:hover {
+  color: #40a9ff;
+}
+
+.streamSetting {
+  padding: 16px 0;
+}
+
+.settingItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.label {
+  width: 120px;
+  color: #666;
+}
+
+.value {
+  flex: 1;
+}
+
+.value :global(.ant-btn-group) {
+  margin-right: 16px;
+}
+
+.tip {
+  margin-top: 8px;
+  color: #999;
+  font-size: 12px;
+} 

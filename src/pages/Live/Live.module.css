@@ -1,0 +1,14 @@
+.live {
+  padding: 24px;
+}
+
+.rightPanel {
+  height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+}
+
+.rightPanel > div {
+  flex: 1;
+  overflow: hidden;
+} 

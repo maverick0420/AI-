@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # 前端服务
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    environment:
+      - REACT_APP_API_URL=http://localhost:3001/api
+      - REACT_APP_WS_URL=ws://localhost:3001
+      - REACT_APP_MEDIA_URL=http://localhost:8000
+    depends_on:
+      - backend
+
+  # 后端服务
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/aty_live
+      - JWT_SECRET=your_jwt_secret
+    depends_on:
+      - mongodb
+
+  # MongoDB数据库
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data: 

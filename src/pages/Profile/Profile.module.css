@@ -1,0 +1,73 @@
+.profile {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.userInfo {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.avatar {
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: opacity 0.3s;
+}
+
+.avatar:hover {
+  opacity: 0.8;
+}
+
+.content {
+  min-height: 400px;
+}
+
+.roomItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.roomCover {
+  width: 120px;
+  height: 67.5px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.roomInfo {
+  flex: 1;
+}
+
+.roomTitle {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.roomStatus {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #666;
+}
+
+.giftRecord {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.giftIcon {
+  width: 32px;
+  height: 32px;
+}
+
+.giftInfo {
+  flex: 1;
+}
+
+.giftTime {
+  color: #999;
+} 

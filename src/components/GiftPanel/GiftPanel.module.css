@@ -1,0 +1,52 @@
+.giftPanel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #fff;
+  border-radius: 4px;
+}
+
+.giftGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 8px;
+  padding: 12px;
+}
+
+.giftCard {
+  cursor: pointer;
+  text-align: center;
+}
+
+.giftIcon {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 8px;
+}
+
+.giftIcon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.giftInfo {
+  font-size: 12px;
+}
+
+.giftName {
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.giftPrice {
+  color: #ff4d4f;
+}
+
+.loginTip {
+  padding: 12px;
+  text-align: center;
+  border-top: 1px solid #f0f0f0;
+} 

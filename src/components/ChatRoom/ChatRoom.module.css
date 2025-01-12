@@ -1,0 +1,44 @@
+.chatRoom {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.messageList {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.messageItem {
+  padding: 4px 0;
+}
+
+.messageContent {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.username {
+  font-weight: bold;
+  color: #1890ff;
+  white-space: nowrap;
+}
+
+.text {
+  word-break: break-word;
+}
+
+.inputArea {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.inputArea input {
+  flex: 1;
+} 
