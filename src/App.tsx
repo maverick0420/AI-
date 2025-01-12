@@ -1,14 +1,11 @@
 import React from 'react';
-import { AuthProvider } from './hooks';
-import Layout from './components/Layout';
+import { AuthProvider } from './hooks/auth';
 import Router from './router';
 
 const App: React.FC = () => {
   return (
     <AuthProvider>
-      <Layout>
-        <Router />
-      </Layout>
+      <Router />
     </AuthProvider>
   );
 };

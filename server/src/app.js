@@ -10,7 +10,7 @@ const app = express();
 // 配置 CORS
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://ai-.vercel.app', 'https://aty-live.vercel.app'] 
+    ? ['https://aty-live.vercel.app'] 
     : 'http://localhost:3000',
   credentials: true
 }));

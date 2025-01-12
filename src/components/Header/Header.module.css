@@ -2,43 +2,29 @@
   display: flex;
   align-items: center;
   padding: 0 24px;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  background: #001529;
 }
 
 .logo {
-  font-size: 20px;
-  font-weight: bold;
-  margin-right: 48px;
+  margin-right: 24px;
 }
 
 .logo a {
-  color: #1890ff;
+  color: white;
+  font-size: 20px;
   text-decoration: none;
 }
 
 .menu {
   flex: 1;
-  border-bottom: none;
 }
 
-.actions {
+.userArea {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.userInfo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-}
-
-.avatar {
-  background-color: #1890ff;
-}
-
 .username {
-  color: #fff;
+  color: white;
 } 

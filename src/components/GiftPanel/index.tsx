@@ -1,98 +1,62 @@
-import React, { useEffect, useState } from 'react';
-import { Tabs, Card, Button, message } from 'antd';
-import { GiftOutlined } from '@ant-design/icons';
-import { Gift } from '../../types';
+import React from 'react';
+import { Modal, Row, Col, Card, Button, message } from 'antd';
 import { useAuth } from '../../hooks/useAuth';
-import request from '../../utils/request';
-import socketClient from '../../utils/socket';
 import styles from './GiftPanel.module.css';
 
 interface GiftPanelProps {
-  roomId: string;
-  hostId: string;
+  visible: boolean;
+  onClose: () => void;
+  onSendGift: (giftId: string) => void;
 }
 
-const GiftPanel: React.FC<GiftPanelProps> = ({ roomId, hostId }) => {
+const gifts = [
+  { id: '1', name: '鲜花', price: 1, icon: '🌹' },
+  { id: '2', name: '蛋糕', price: 5, icon: '🎂' },
+  { id: '3', name: '火箭', price: 100, icon: '🚀' },
+  { id: '4', name: '皇冠', price: 500, icon: '👑' },
+];
+
+const GiftPanel: React.FC<GiftPanelProps> = ({ visible, onClose, onSendGift }) => {
   const { user } = useAuth();
-  const [gifts, setGifts] = useState<Gift[]>([]);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchGifts();
-  }, []);
-
-  const fetchGifts = async () => {
-    try {
-      const response = await request.get('/gifts');
-      setGifts(response.gifts);
-    } catch (error) {
-      console.error('获取礼物列表失败:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleSendGift = async (gift: Gift) => {
+  const handleSendGift = (gift: typeof gifts[0]) => {
     if (!user) {
       message.error('请先登录');
       return;
     }
-
-    try {
-      await request.post('/gifts/send', {
-        giftId: gift.id,
-        roomId,
-        receiverId: hostId
-      });
-
-      socketClient.sendGift(roomId, gift, user);
-      message.success('赠送成功');
-    } catch (error) {
-      message.error('赠送失败，余额不足');
+    if (user.balance < gift.price) {
+      message.error('余额不足，请先充值');
+      return;
     }
+    onSendGift(gift.id);
+    message.success(`成功赠送${gift.name}`);
   };
 
   return (
-    <div className={styles.giftPanel}>
-      <Tabs
-        defaultActiveKey="popular"
-        items={[
-          {
-            key: 'popular',
-            label: '热门礼物',
-            children: (
-              <div className={styles.giftGrid}>
-                {gifts.map(gift => (
-                  <Card
-                    key={gift.id}
-                    hoverable
-                    className={styles.giftCard}
-                    onClick={() => handleSendGift(gift)}
-                  >
-                    <div className={styles.giftIcon}>
-                      <img src={gift.icon} alt={gift.name} />
-                    </div>
-                    <div className={styles.giftInfo}>
-                      <div className={styles.giftName}>{gift.name}</div>
-                      <div className={styles.giftPrice}>
-                        <GiftOutlined /> {gift.price}
-                      </div>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            )
-          }
-        ]}
-      />
-      {!user && (
-        <div className={styles.loginTip}>
-          <Button type="primary" onClick={() => message.info('请先登录')}>
-            登录后赠送礼物
-          </Button>
-        </div>
-      )}
-    </div>
+    <Modal
+      title="赠送礼物"
+      visible={visible}
+      onCancel={onClose}
+      footer={null}
+    >
+      <Row gutter={[16, 16]}>
+        {gifts.map(gift => (
+          <Col span={12} key={gift.id}>
+            <Card hoverable className={styles.giftCard}>
+              <div className={styles.giftIcon}>{gift.icon}</div>
+              <div className={styles.giftName}>{gift.name}</div>
+              <div className={styles.giftPrice}>{gift.price} 币</div>
+              <Button 
+                type="primary" 
+                onClick={() => handleSendGift(gift)}
+              >
+                赠送
+              </Button>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </Modal>
   );
 };
 

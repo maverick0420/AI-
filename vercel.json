@@ -20,8 +20,16 @@
       "dest": "/server/src/app.js"
     },
     {
+      "src": "/socket.io/(.*)",
+      "dest": "/server/src/app.js"
+    },
+    {
       "src": "/static/(.*)",
       "dest": "/static/$1"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
     },
     {
       "src": "/favicon.ico",
