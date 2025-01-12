@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthProvider } from './hooks/useAuth';
+import { AuthProvider } from './hooks';
 import Layout from './components/Layout';
 import Router from './router';
 
